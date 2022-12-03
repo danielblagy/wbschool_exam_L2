@@ -22,7 +22,8 @@ func TestUnpackingString(t *testing.T) {
 
 	for _, sample := range testSample {
 		result, err := unpackString(sample.input)
-		if result != sample.expectedOutput && err != sample.expectedError {
+		errorsMatch := (err != nil && sample.expectedError != nil && err.Error() == sample.expectedError.Error()) || err == sample.expectedError
+		if result != sample.expectedOutput || !errorsMatch {
 			t.Errorf("Tested input: %s\nExpected output: %s, error: %v\n Given output: %s, error: %v\n", sample.input, sample.expectedOutput, sample.expectedError, result, err)
 		}
 	}
