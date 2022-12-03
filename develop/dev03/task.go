@@ -1,5 +1,11 @@
 package main
 
+import (
+	"errors"
+	"sort"
+	"strings"
+)
+
 /*
 === Утилита sort ===
 
@@ -27,4 +33,38 @@ package main
 
 func main() {
 
+}
+
+type SortOptions struct {
+	k int
+	n bool
+	r bool
+	u bool
+}
+
+func SortStrings(strs []string, options SortOptions) ([]string, error) {
+	// the number of columns each string must have is determined by the first string
+	strsColLen := len(strings.Split(strs[0], " "))
+	if options.k < 0 || options.k >= strsColLen {
+		return nil, errors.New("invalid SortOptions: k is out of bounds")
+	}
+
+	result := make([]string, 0, len(strs))
+
+	pairs := make(map[string]int, len(strs))
+	column := make([]string, 0, len(strs))
+
+	for i, str := range strs {
+		strCols := strings.Split(str, " ")
+		pairs[strCols[options.k]] = i
+		column = append(column, strCols[options.k])
+	}
+
+	sort.Strings(column)
+
+	for _, row := range column {
+		result = append(result, strs[pairs[row]])
+	}
+
+	return result, nil
 }
