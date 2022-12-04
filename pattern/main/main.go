@@ -17,4 +17,7 @@ func main() {
 
 	fmt.Println("Visitor Pattern")
 	pattern.VisitorExample()
+
+	fmt.Println("Command Pattern")
+	pattern.CommandExample()
 }
