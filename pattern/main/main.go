@@ -14,4 +14,7 @@ func main() {
 
 	fmt.Println("Builder Pattern")
 	pattern.BuildPerson()
+
+	fmt.Println("Visitor Pattern")
+	pattern.VisitorExample()
 }
