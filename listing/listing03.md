@@ -22,6 +22,10 @@ func main() {
 
 Ответ:
 ```
-...
+Программа выведет:
+<nil>
+false
+
+false, потому что мы сравниваем nil error с nil *os.PathError, разные типы.
 
 ```
